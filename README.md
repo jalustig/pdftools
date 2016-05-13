@@ -57,7 +57,7 @@ If I run the `make-pdfs` script in the `archive-images/archive-visit-2016-04-25`
 To prepare:
 
 0. Have a backup. *Always have a backup!*
-1. Download the `make-pdfs` file, and place it somewhere; I keep it at ``~/scripts/pdfs/make-pdfs`
+1. Download the `make-pdfs` file, and place it somewhere; I keep it at ~/scripts/pdfs/make-pdfs`
 2. Make the script executable, by running: `chmod +x ~/scripts/pdfs/make-pdfs`
 3. Make sure that you have a folder ~/Dropbox/pdfs (this is where the script deposits finished PDF files)
 
