@@ -4,7 +4,7 @@ These scripts are tools I've developed to help manage photographs taken during r
 
 # Requirements
 
- - OS X
+ - OS X (it probably can be made to run on any Unix-based system, but the tagging system is OS X-only)
  - Homebrew
  - Homebrew packages: `tag`, `imagemagick`
 
