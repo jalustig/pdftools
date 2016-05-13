@@ -59,11 +59,11 @@ To prepare:
 0. Have a backup. *Always have a backup!*
 1. Download the `make-pdfs` file, and place it somewhere; I keep it at ~/scripts/pdfs/make-pdfs`
 2. Make the script executable, by running: `chmod +x ~/scripts/pdfs/make-pdfs`
-3. Make sure that you have a folder ~/Dropbox/pdfs (this is where the script deposits finished PDF files)
+3. Make sure that you have a folder `~/Dropbox/pdfs` (this is where the script deposits finished PDF files)
 
 To run it:
 
 0. Have a backup. *Always have a backup!*
 1. Organize your images into folders, e.g. one filesystem folder per archive folder - as above.
 2. Rotate all your images so they are in the proper orientation. When the images are rotated, tag the containing folder `photos oriented`. (The script is set up to select the folders which have been oriented.)
-3. Open Terminal and navigate to the containing folder, and run the `make-pdf` script. It doesn't matter where you store the script (I store it at `~/scripts/pdfs/make-pdf`), it will run on the folders present where you are at in Terminal, depositing the PDF files in ~/Dropbox/pdfs and 
+3. Open Terminal and navigate to the containing folder, and run the `make-pdf` script. It doesn't matter where you store the script (I store it at `~/scripts/pdfs/make-pdf`), it will run on the folders present where you are at in Terminal, depositing the PDF files in `~/Dropbox/pdfs` and mark the folder as `pdf made`.
