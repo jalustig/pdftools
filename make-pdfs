@@ -1,0 +1,60 @@
+#!/usr/local/bin/bash
+
+cwd=$(pwd)
+FOLDERSTRING=`tag -f 'photos oriented' .`
+#FOLDERSTRING=`tag -f 'test' .`
+FOLDERS=()
+
+# If the user specifies an output directory, then files will be saved there
+# -- otherwise it will try to save to Dropbox
+ 
+outDirectory="$1"
+if [[ $outDirectory == "" ]]
+then
+	username=$(whoami)
+	outDirectory="/Users/$username/Dropbox/pdfs"
+fi
+
+if [ -d "$outDirectory" ]; then
+
+	echo "Saving PDFs to ${outDirectory}"
+
+    # Will enter here if $DIRECTORY exists, even if it contains spaces
+	# put it into an array
+	while read -r line; do FOLDERS=("${FOLDERS[@]}" "$line"); done <<< "$FOLDERSTRING";
+
+	# go through each item in the array
+	for i in "${FOLDERS[@]}"
+	do
+		tags=$(tag -l --no-name "${i}")
+		folderName=$(basename "${i}")
+		# find out if the current item has been PDF'd already
+		isPDFed=0
+		if [[ $tags == *"pdf made"* ]]
+		then
+	  		isPDFed=1;
+		fi
+		echo "FOLDER: ${folderName}";
+		echo "FULL PATH: ${i}";
+		echo "CURRENT TAGS: ${tags}"
+		if (($isPDFed == 0)); then
+			echo "NOT PDF'D!!"
+			nice -n 5 convert "${i}/*.JPG" -verbose -compress JPEG "${outDirectory}/${folderName}.pdf"
+			tag --add "pdf made" "${i}"
+			tags=$(tag -l --no-name "${i}")
+			echo "UPDATED TAGS: ${tags}"
+		else
+			echo "PDF'D!!! This file is DONE"
+		fi
+		echo ""
+	
+		# ways to output pdfs:
+		# (0) Adobe acrobat [146.1 MB --> 25 MB on OCR]
+		# (1) convert *.JPG -verbose -compress JPEG out-compress-jpeg.pdf [123.7 MB --> 25.7 MB on OCR]
+		# (2) convert without compression [non-starter]
+		# (3) pdftk??
+	done
+
+else
+	echo "The output directory ${outDirectory} doesn't exist, cannot process files. You can run make-pdfs PATH-TO-A-DIRECTORY-OF-YOUR-CHOICE to save to a specific folder, or please create the folder ${outDirectory}"
+fi

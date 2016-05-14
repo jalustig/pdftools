@@ -18,7 +18,7 @@ Then install the packages in the background:
 
 # Usage & Notes
 
-**make-pdf**
+**make-pdfs**
 
 This is a script which will take a set of photographs and concatenate them into a PDF. I used to use Adobe Acrobat to do this, but you can only make one PDF at a time, and it also blocks Acrobat while you are doing it (so you can't read or work with other files at the same time.) So I created a script to do it for me!
 
@@ -66,4 +66,5 @@ To run it:
 0. Have a backup. *Always have a backup!*
 1. Organize your images into folders, e.g. one filesystem folder per archive folder - as above.
 2. Rotate all your images so they are in the proper orientation. When the images are rotated, tag the containing folder `photos oriented`. (The script is set up to select the folders which have been oriented.)
-3. Open Terminal and navigate to the containing folder, and run the `make-pdf` script. It doesn't matter where you store the script (I store it at `~/scripts/pdfs/make-pdf`), it will run on the folders present where you are at in Terminal, depositing the PDF files in `~/Dropbox/pdfs` and mark the folder as `pdf made`.
+3. Open Terminal and navigate to the containing folder
+4. Run the `make-pdfs` script. It doesn't matter where you store the script (I store it at `~/scripts/pdfs/make-pdfs`), it will run on the folders present where you are at in Terminal. You can run it either as `make-pdfs /path/to/an/output/directory` (where the PDFs will be saved), or alternately just `make-pdfs` which will by default save them in `~/Dropbox/pdfs`. Once it is done with a folder full of images, it will mark the folder as `pdf made`.
