@@ -29,7 +29,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Determines the DPI of a PDF file.
-# Usage: ./pdfppi MyPdf.pdf
+# Usage: ./pdfdpi MyPdf.pdf
 
 filename="$1"
 
