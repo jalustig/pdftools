@@ -6,7 +6,7 @@ These scripts are tools I've developed to help manage photographs taken during r
 
  - OS X (it probably can be made to run on any Unix-based system, but the tagging system is OS X-only)
  - Homebrew
- - Homebrew packages: `tag`, `imagemagick`
+ - Homebrew packages: `tag`, `imagemagick`, `poppler`
 
 Open Terminal, and install [homebrew](http://brew.sh) if you don't have it yet:
 
@@ -14,7 +14,7 @@ Open Terminal, and install [homebrew](http://brew.sh) if you don't have it yet:
 
 Then install the packages in the background:
 
-	brew install tag imagemagick
+	brew install tag imagemagick poppler
 
 # Usage & Notes
 
