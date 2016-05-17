@@ -43,6 +43,13 @@ then
 	outDirectory="/Users/$username/Dropbox/pdfs"
 fi
 
+if [[ ! -d $outDirectory ]]; then
+	echo "${outDirectory} is not a folder. Please specify a folder to deposit the finished PDFs."
+	echo ""
+
+	exit 1
+fi
+
 if [ -d "$outDirectory" ]; then
 
 	echo "Saving PDFs to ${outDirectory}"
