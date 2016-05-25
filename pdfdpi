@@ -48,3 +48,4 @@ fi
 dpi=`pdfimages -list -f 0 -l 1 "${filename}" | tail -n +3 | sed -E 's/.* ([0-9]+) +([0-9]+) +[0-9\.]*[KBM].*/\1/'`
 
 echo -n "PDF's DPI is probably: ${dpi}."
+echo ""
