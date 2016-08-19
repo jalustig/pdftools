@@ -39,7 +39,7 @@ if [[ $filename == "" ]]; then
 	exit 1
 fi
 
-if [ ! -f $filename ]; then
+if [[ ! -f $filename ]]; then
 	echo "File not found!"
 	echo ""
 	exit 1
@@ -47,5 +47,7 @@ fi
 
 dpi=`pdfimages -list -f 0 -l 1 "${filename}" | tail -n +3 | sed -E 's/.* ([0-9]+) +([0-9]+) +[0-9\.]*[KBM].*/\1/'`
 
+echo ""
 echo -n "PDF's DPI is probably: ${dpi}."
+echo ""
 echo ""
