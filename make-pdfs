@@ -74,7 +74,22 @@ if [ -d "$outDirectory" ]; then
 		echo "CURRENT TAGS: ${tags}"
 		if (($isPDFed == 0)); then
 			echo "NOT PDF'D!!"
-			nice -n 5 convert "${i}/*.JPG" -verbose -compress JPEG "${outDirectory}/${folderName}.pdf"
+			# Using IMAGEMAGICK
+			# nice -n 5 convert "${i}/*.JPG" -compress JPEG "${outDirectory}/${folderName}.pdf"
+			
+			# Using GRAPHICSMAGICK
+			# 1) convert Jpegs to Jpeg-2000
+			mv "$i" temp
+			parallel gm convert -define 'jp2:rate=0.008' {} {}.jp2 ::: temp/*.JPG
+			# 2) convert new files to PDFs
+			# this (outdated) version uses graphicsmagick.... 
+			# nice -n 5 m convert -verbose "${i}/*.jp2" "${outDirectory}/${folderName}.pdf"
+			# this (BETTER) version uses img2pdf (`pip3 install img2pdf`)
+			img2pdf temp/*.jp2 -o "${outDirectory}/${folderName}.pdf"
+			rm temp/*.jp2
+			# rm "{$i}/*.jp2"
+			mv temp "$i"
+			
 			tag --add "pdf made" "${i}"
 			tags=$(tag -l --no-name "${i}")
 			echo "UPDATED TAGS: ${tags}"

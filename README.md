@@ -6,7 +6,8 @@ These scripts are tools I've developed to help manage photographs taken during r
 
  - OS X (it probably can be made to run on any Unix-based system, but the tagging system is OS X-only)
  - Homebrew
- - Homebrew packages: `tag`, `imagemagick`, `poppler`
+ - Homebrew packages: `tag`, `imagemagick`, `poppler`, `graphicsmagick`, `jasper` (for JPEG2000 support)
+ - pip2 package `img2pdf`
 
 Open Terminal, and install [homebrew](http://brew.sh) if you don't have it yet:
 
@@ -19,6 +20,8 @@ Then install the packages in the background:
 # Usage & Notes
 
 **make-pdfs**
+
+*IMPORTANT UPDATE:* The latest version will encode the PDFs using JPEG-2000! (JP2) This will dramatically reduce the size of your PDFs.
 
 This is a script which will take a set of photographs and concatenate them into a PDF. I used to use Adobe Acrobat to do this, but you can only make one PDF at a time, and it also blocks Acrobat while you are doing it (so you can't read or work with other files at the same time.) So I created a script to do it for me!
 
