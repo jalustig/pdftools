@@ -74,24 +74,44 @@ if [ -d "$outDirectory" ]; then
 		echo "CURRENT TAGS: ${tags}"
 		if (($isPDFed == 0)); then
 			echo "NOT PDF'D!!"
+			
 			# Using IMAGEMAGICK
 			# nice -n 5 convert "${i}/*.JPG" -compress JPEG "${outDirectory}/${folderName}.pdf"
 			
 			# Using GRAPHICSMAGICK
-			# 1) convert Jpegs to Jpeg-2000
+			
+			# 0) Set up folder
 			mv "$i" temp
-			parallel gm convert -define 'jp2:rate=0.008' {} {}.jp2 ::: temp/*.JPG
-			# 2) convert new files to PDFs
+			
+			# I DON'T ACTUALLY DO THIS
+			# 1) rotate all images 360 degrees (bc there is sometimes an issue with graphicsmagick & MacOS Preview)
+			# parallel gm convert -rotate 360 {} {} ::: temp/*.JPG
+			# sips -r 180 temp/*.JPG # /dev/null # don't print out lots of stuff
+			# sips -r 180 temp/*.JPG # /dev/null # don't print out lots of stuff
+			# (i tried to do this programmatically --> but it didn't really do anything. I had to make an Automator workflow which would do this if necessary.)
+			
+			
+			# 2) convert Jpegs to Jpeg-2000
+			# GRAY --> makes files 1/2 the size
+			parallel gm convert -colorspace GRAY -define 'jp2:rate=0.012' {} {}.jp2 ::: temp/*.JPG
+			# COLOR
+			# parallel gm convert -define 'jp2:rate=0.008' {} {}.jp2 ::: temp/*.JPG
+			
+			# 3) convert new files to PDFs
 			# this (outdated) version uses graphicsmagick.... 
 			# nice -n 5 m convert -verbose "${i}/*.jp2" "${outDirectory}/${folderName}.pdf"
 			# this (BETTER) version uses img2pdf (`pip3 install img2pdf`)
 			img2pdf temp/*.jp2 -o "${outDirectory}/${folderName}.pdf"
+			
+			# 4) clear out the temp files
 			rm temp/*.jp2
 			# rm "{$i}/*.jp2"
 			mv temp "$i"
 			
+			# 5) add tags to the folder marking it as pdf'd
 			tag --add "pdf made" "${i}"
 			tags=$(tag -l --no-name "${i}")
+			
 			echo "UPDATED TAGS: ${tags}"
 		else
 			echo "PDF'D!!! This file is DONE"
